@@ -1064,8 +1064,10 @@ background-repeat: no-repeat;
     text-align: center;
 }
 
-#about{
-  background-image: url("images/pinkBg.svg");
+#about {
+  background-image: url(images/pinkBg.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
   color: white;
   text-align: right;
   padding: 3vh 7vw;
