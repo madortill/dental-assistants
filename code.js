@@ -783,10 +783,11 @@ function slotGame(name, styleName, index, ...contents) {
 
 function createGameCards(n, ...a) {
     var el = document.createElement("div");
-    if (arrShaffelCard[n] >= termList.length) {
+    console.log(arrShaffelCard);
+    if (arrShaffelCard[n] > termList.length) {
 
-        if (termList[arrShaffelCard[n] - termList.length].explain.length > 30) {
-            var tempSlot = slotGame("explain", "term-explain-card-game", arrShaffelCard[n] - termList.length, `${(termList[arrShaffelCard[n] - termList.length].explain.slice(0, 30))}...`)
+        if (termList[arrShaffelCard[n] - termList.length].explain.length > 15) {
+            var tempSlot = slotGame("explain", "term-explain-card-game", arrShaffelCard[n] - termList.length, `${(termList[arrShaffelCard[n] - termList.length].explain.slice(0, 15))}...`)
             tempSlot.addEventListener("touchend", function () {
                 clearTimeout(tempSlot.pressTimer);
                 // Clear timeout
@@ -811,7 +812,35 @@ function createGameCards(n, ...a) {
         }
     }
     else {
-        el.append(slotGame("term", "term-card-game", arrShaffelCard[n], termList[arrShaffelCard[n]].term));
+
+        if (termList[arrShaffelCard[n]].term.length > 15) {
+            var tempSlot = slotGame("term", "term-explain-card-game", arrShaffelCard[n] - termList.length, `${(termList[arrShaffelCard[n]].term.slice(0, 15))}...`)
+            tempSlot.addEventListener("touchend", function () {
+                clearTimeout(tempSlot.pressTimer);
+                // Clear timeout
+                return false;
+            });
+            tempSlot.addEventListener("touchstart", function () {
+                // Set timeout
+                tempSlot.pressTimer = window.setTimeout(function () {
+                    document.querySelector(".big-explain").style.visibility = "visible";
+                    document.querySelector(".space-of-adding-cards").classList.add("disable");
+                    document.getElementById("big-explain-img").addEventListener("click", afterClickXExplain);
+                    document.querySelector(".big-explain-text").innerHTML = termList[arrShaffelCard[n]].term;
+                }, 500);
+                return false;
+            });
+
+
+            el.append(tempSlot);
+        }
+        else {
+            el.append(slotGame("term", "term-card-game", arrShaffelCard[n],  termList[arrShaffelCard[n]].term));
+        }
+
+
+
+       // el.append(slotGame("term", "term-card-game", arrShaffelCard[n], termList[arrShaffelCard[n]].term));
     }
 
     if (arrShaffelCard[n + 1] >= termList.length) {
