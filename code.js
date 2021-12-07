@@ -174,7 +174,7 @@ const Data =
         term: "incisal embrasure- אמברזורה אינסיזלית",
         explain: "חלל בצורת משולש בין שתי שיניים סמוכות. קודקודו בנקודת המגע, בסיסו קו הסגר וצלעותיו המשטחים האינסיזלים"
     },{
-        term: "buccal and lingual embrasures- אמברזורה בוקלית ולינגואלית",
+        term: "אמברזורה בוקלית ולינגואלית",
         explain: "חלל בצורת משולש בין שתי שיניים סמוכות. קודקודו בנקודת המגע, בסיסו בקו הדמיוני בצד הבוקלי/הלינגואלי וצלעותיו המשטחים הבוקלים או הלינגואלים"
     },{
         term: "interdental papilla- פפילה דנטלית",
@@ -784,7 +784,7 @@ function slotGame(name, styleName, index, ...contents) {
 function createGameCards(n, ...a) {
     var el = document.createElement("div");
     console.log(arrShaffelCard);
-    if (arrShaffelCard[n] > termList.length) {
+    if (arrShaffelCard[n] > termList.length-1) {
 
         if (termList[arrShaffelCard[n] - termList.length].explain.length > 15) {
             var tempSlot = slotGame("explain", "term-explain-card-game", arrShaffelCard[n] - termList.length, `${(termList[arrShaffelCard[n] - termList.length].explain.slice(0, 15))}...`)
